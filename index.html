@@ -1,57 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tax App</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-</head>
-<body>
-    <section id="header">
-        <h1>Tax App</h1>
-        <p>This is a silly app that takes your income and the tax declared on the ATO <a href="https://www.ato.gov.au/Calculators-and-tools/Host/?anchor=STC&anchor=STC#STC/questions" target="_blank">simple tax calculator</a> and presents it across monthly, fortnightly and weekly and hourly rates.</p>
-        <form id='form' action="" method="GET">
-            <input type="text" id="income" placeholder="Input income">
-            <input type="text" id="tax" placeholder="input the tax amount calculated on this income">
-            <input type="submit" value="submit" id="submit">
-        </form>
-    </section>
-    
-    <table>
-        <tbody id="output">
-            <tr class="table-header">
-                <th>Monthly</th>
-                <th>Fortnight</th>
-                <th>Weekly</th>
-                <th>Hourly</th>
-                <th>Remove</th>
-            </tr>
-            <tr class="table-data"></tr>
-        </tbody>
-    </table>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
-
-        body {
-            height: 2000px;
+        #loading {
+            display: none;
         }
-        table {
+
+        #results {
+            display: none;
+        }
+
+        html, body {
+            height: 100%;
             width: 100%;
         }
 
-        .table-header {
-            background-color: #eee;
+        body {
+            background-image: url(/assets/img/money.gif);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
         }
-
-        .scroll {
-            position: fixed;
-        }
-
-        .no-scroll {
-            position: relative;
-        }
-    
-
+        
     </style>
+    <title>ATO Tax Calculator</title>
+  </head>
+  <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 mx-auto">
+                <div class="card card-body text-center mt-5">
+                    <h1 class="heading display-3 pb-1">Tax App</h1>
+                    <p class="text-justify pb-2">This is a simple app that will figure out your net income for the 2020-2021 Australian Financial Year. The app works in a similar way to the <a href="https://www.ato.gov.au/Calculators-and-tools/Host/?anchor=STC&anchor=STC#STC/questions" target="_blank">ATO Tax Calculator</a>, but this calculator will present it across monthly, fortnightly and weekly and hourly rates.</p>
+                    <form id="tax-form">
+                        <div class="form-group">
+                            <!-- Gross income -->
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="text" id="income" class="form-control" placeholder="Gross annual income">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- Amount -->
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="text" id="tax-payable" class="form-control" placeholder="Tax payable" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Tax me big boy" class="btn-block">
+                        </div>
+                    </form>
+                    <!-- LOADER -->
+                    <div id="loading">
+                        <img class="card-img" src="/assets/img/calc.gif" alt="Retrieved from Tenor Gif">
+                    </div>
+                    <!-- RESULTS -->
+                    <div id="results" class="pt-4">
+                        <h2>Results</h2>
+                        <!-- Annual -->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-text">Annual</span>
+                                <input type="text" id="annual" class="form-control" disabled>
+                            </div>
+                        </div>
+                        <!-- Monthly -->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-text">Monthly</span>
+                                <input type="text" id="monthly" class="form-control" disabled>
+                            </div>
+                        </div>
+                        <!-- Fornightly -->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-text">Fortnightly</span>
+                                <input type="text" id="fortnightly" class="form-control" disabled>
+                            </div>
+                        </div>
+                        <!-- Weekly -->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-text">Weekly</span>
+                                <input type="text" id="weekly" class="form-control" disabled>
+                            </div>
+                        </div>
+                        <!-- Daily -->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-text">Daily</span>
+                                <input type="text" id="daily" class="form-control" disabled>
+                            </div>
+                        </div>
+                        <!-- Hourly -->
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-text">Hourly</span>
+                                <input type="text" id="hourly" class="form-control" disabled>
+                            </div>
+                        </div>
+                        <p>The following is your net income divided across the month, fortnight, week, day and hour. These are only estimates and do not include additional tax expenses such as the Medicare Levy & HECS. <strong>2019-2020 Personal Tax Rates</strong></p>
+                    </div>            
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="/assets/js/taxApp.js"></script>
-</body>
+  </body>
 </html>
